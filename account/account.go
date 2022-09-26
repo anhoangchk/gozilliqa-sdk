@@ -59,23 +59,24 @@ func newHDAccount(mnemonic string, path DerivationPath) (*Account, error) {
 	if err != nil {
 		return nil, err
 	}
-	acc44H, err := masterKey.Child(hdkeychain.HardenedKeyStart + canonical(path[0]))
+
+	acc44H, err := masterKey.DeriveNonStandard(hdkeychain.HardenedKeyStart + canonical(path[0]))
 	if err != nil {
 		return nil, err
 	}
-	acc44H313H, err := acc44H.Child(hdkeychain.HardenedKeyStart + canonical(path[1]))
+	acc44H313H, err := acc44H.DeriveNonStandard(hdkeychain.HardenedKeyStart + canonical(path[1]))
 	if err != nil {
 		return nil, err
 	}
-	acc44H313H0H, err := acc44H313H.Child(hdkeychain.HardenedKeyStart + canonical(path[2]))
+	acc44H313H0H, err := acc44H313H.DeriveNonStandard(hdkeychain.HardenedKeyStart + canonical(path[2]))
 	if err != nil {
 		return nil, err
 	}
-	acc44H313H0H0, err := acc44H313H0H.Child(canonical(path[3]))
+	acc44H313H0H0, err := acc44H313H0H.DeriveNonStandard(canonical(path[3]))
 	if err != nil {
 		return nil, err
 	}
-	acc44H60H0H00, err := acc44H313H0H0.Child(canonical(path[4]))
+	acc44H60H0H00, err := acc44H313H0H0.DeriveNonStandard(canonical(path[4]))
 	if err != nil {
 		return nil, err
 	}
